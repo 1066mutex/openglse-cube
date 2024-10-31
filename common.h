@@ -32,7 +32,7 @@
 #include <EGL/eglext.h>
 
 #include <gbm.h>
-#include <drm_fourcc.h>
+#include <drm/drm_fourcc.h>
 #include <stdbool.h>
 
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))

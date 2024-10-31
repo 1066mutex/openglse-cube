@@ -92,6 +92,18 @@ static int legacy_run(const struct gbm *gbm, const struct egl *egl)
 			glBindFramebuffer(GL_FRAMEBUFFER, egl->fbs[frame % NUM_BUFFERS].fb);
 		}
 
+
+
+        // for (int i = 0; i < 363; i+=3) { // It's 3 time the same number anyways for each number
+        //     std::cout << buffer[i] << " "; // It gives me only 0's
+        // }
+        // std::cout << "no data" << std::endl;
+        // std::ofstream myfile;
+        // myfile.open("/usr/bin/image");
+        // myfile << buffer;
+        // myfile.close();
+
+
 		egl->draw(i++);
 
 		if (gbm->surface) {

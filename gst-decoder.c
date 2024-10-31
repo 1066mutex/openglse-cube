@@ -31,7 +31,7 @@
 
 #include "common.h"
 
-#include <drm_fourcc.h>
+#include <drm/drm_fourcc.h>
 
 #include <gst/gst.h>
 #include <gst/gstmemory.h>

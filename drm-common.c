@@ -92,7 +92,7 @@ struct drm_fb * drm_fb_get_from_bo(struct gbm_bo *bo)
 			modifiers[i] = modifiers[0];
 		}
 
-		if (modifiers[0]) {
+		if (modifiers[0] && modifiers[0] != DRM_FORMAT_MOD_INVALID) {
 			flags = DRM_MODE_FB_MODIFIERS;
 			printf("Using modifier %" PRIx64 "\n", modifiers[0]);
 		}
@@ -106,16 +106,27 @@ struct drm_fb * drm_fb_get_from_bo(struct gbm_bo *bo)
 		if (flags)
 			fprintf(stderr, "Modifiers failed!\n");
 
-		memcpy(handles, (uint32_t [4]){gbm_bo_get_handle(bo).u32,0,0,0}, 16);
-		memcpy(strides, (uint32_t [4]){gbm_bo_get_stride(bo),0,0,0}, 16);
+
+
+
+	//	memcpy(handles, (uint32_t [4]){,0,0,0}, 16);
+	//	memcpy(strides, (uint32_t [4]){gbm_bo_get_stride(bo),0,0,0}, 16);
+		
 		memset(offsets, 0, 16);
+		memset(handles, 0, 16);
+		memset(strides, 0, 16);
+
+		handles[0] = gbm_bo_get_handle(bo).u32;
+		strides[0] = gbm_bo_get_stride(bo);
+
+        // create framebuffer object for
 		ret = drmModeAddFB2(drm_fd, width, height, format,
 				handles, strides, offsets, &fb->fb_id, 0);
 	}
 
 	if (ret) {
 		printf("failed to create fb: %s\n", strerror(errno));
-		free(fb);
+		free( fb);
 		return NULL;
 	}
 

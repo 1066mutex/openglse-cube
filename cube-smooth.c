@@ -181,6 +181,34 @@ static void draw_cube_smooth(unsigned i)
 	glClearColor(0.5, 0.5, 0.5, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 
+    unsigned int width = 800;
+    unsigned int height = 480 ;
+        unsigned char* buffer[width * height*4];
+        GLint s = width* height*4;
+        //std::array<GLfloat, 800*480*4> buffer{};
+        glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_SHORT, &buffer[0]);
+
+        FILE *file = fopen("frames.ppm", "wb");
+        if (!file) {
+            fprintf(stderr, "Error opening file for writing: %s\n", "frames");
+            //return -1;
+        }
+        // Write PPM header
+        fprintf(file, "P6\n%d %d\n255\n", width, height);
+            // Write pixel data
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                int index = ((y * width + x) * 4);
+                
+                // Assuming RGB format (3 bytes per pixel)
+                fputc(buffer[index + 2], file);  // Red
+                fputc(buffer[index + 1], file);  // Green
+                fputc(buffer[index], file);      // Blue
+            }
+        }
+
+        fclose(file);
+
 	esMatrixLoadIdentity(&modelview);
 	esTranslate(&modelview, 0.0f, 0.0f, -8.0f);
 	esRotate(&modelview, 45.0f + (0.25f * i), 1.0f, 0.0f, 0.0f);
