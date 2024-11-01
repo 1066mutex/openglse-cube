@@ -1,13 +1,10 @@
-#ifndef MEDIALOADER_H_
-#define MEDIALOADER_H_
-
 
 #ifndef MEDIALOADER_H
 #define MEDIALOADER_H
 
-#include "gfx/PixelFormat.h"
+#include "PixelFormat.h"
 
-#include "gfx/ByteVector.h"
+#include "ByteVector.h"
 #include "FileInfo.h"
 #include <string>
 
@@ -52,6 +49,3 @@ namespace FCInterface {
 }
 
 #endif //!defined MEDIALOADER_H
-
-
-#endif // MEDIALOADER_H_

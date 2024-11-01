@@ -28,6 +28,7 @@
 #include "esUtil.h"
 
 
+
 static struct {
 	struct egl egl;
 
@@ -175,39 +176,67 @@ static const char *fragment_shader_source =
 
 static void draw_cube_smooth(unsigned i)
 {
-	ESMatrix modelview;
-
-	/* clear the color buffer */
+	
+    
+    
+    /* clear the color buffer */
 	glClearColor(0.5, 0.5, 0.5, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
+    
 
+    ESMatrix modelview;
+
+    // set the target framebuffer to read
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    glPixelStorei(GL_PACK_ALIGNMENT, 1);
     unsigned int width = 800;
     unsigned int height = 480 ;
-        unsigned char* buffer[width * height*4];
-        GLint s = width* height*4;
+    unsigned char* buffer[(width * height)*4];
+    GLint s = (width* height)*4;
         //std::array<GLfloat, 800*480*4> buffer{};
-        glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_SHORT, &buffer[0]);
+    glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_SHORT, &buffer[0]);
 
-        FILE *file = fopen("frames.ppm", "wb");
-        if (!file) {
-            fprintf(stderr, "Error opening file for writing: %s\n", "frames");
-            //return -1;
+    GLenum ret = glGetError();
+    
+        FILE *outFile = fopen("image", "wb");
+        GLint eReadFormat,eReadType;
+        int glErr;
+
+        glErr = glGetError();
+        if(glErr)
+        {
+            printf("glGetError %d encountered\n", glErr);
         }
-        // Write PPM header
-        fprintf(file, "P6\n%d %d\n255\n", width, height);
-            // Write pixel data
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                int index = ((y * width + x) * 4);
+        fwrite(buffer, sizeof(char), s, outFile);
+            // unsigned char* pPixel = &sfb[0];
+            // for (unsigned int p = 0; p < (gbm.width * gbm.height) << 2; p += 4) {
+            // 	pPixel[p + 3] = 0xff;
+            // }
+        fclose(outFile);
+
+        // FILE *file = fopen("frames.ppm", "wb");
+        // if (!file) {
+        //     fprintf(stderr, "Error opening file for writing: %s\n", "frames");
+        //     //return -1;
+        // }
+        // // Write PPM header
+        // fprintf(file, "P6\n%d %d\n255\n", width, height);
+        //     // Write pixel data
+        // for (int y = 0; y < height; y++) {
+        //     for (int x = 0; x < width; x++) {
+        //         int index = ((y * width + x) * 4);
                 
-                // Assuming RGB format (3 bytes per pixel)
-                fputc(buffer[index + 2], file);  // Red
-                fputc(buffer[index + 1], file);  // Green
-                fputc(buffer[index], file);      // Blue
-            }
-        }
+        //         // Assuming RGB format (3 bytes per pixel)
+        //         fputc(buffer[index + 2], file);  // Red
+        //         fputc(buffer[index + 1], file);  // Green
+        //         fputc(buffer[index], file);      // Blue
+        //     }
+        // }
 
-        fclose(file);
+        // fclose(file);
+
+
+
 
 	esMatrixLoadIdentity(&modelview);
 	esTranslate(&modelview, 0.0f, 0.0f, -8.0f);

@@ -131,6 +131,7 @@ static int legacy_run(const struct gbm *gbm, const struct egl *egl)
 			return -1;
 		}
 
+
 		while (waiting_for_flip) {
 			FD_ZERO(&fds);
 			FD_SET(0, &fds);

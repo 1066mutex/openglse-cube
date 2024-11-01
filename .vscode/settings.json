@@ -2,10 +2,10 @@
     // configuration for code deployment to target and remote debugging 
     // required by: tasks.json, launch.json
     "ENV_CONFIG": { 
-         "TARGET_IP": "192.168.0.130",
+         "TARGET_IP": "192.168.0.94",
          "DEBUG_PORT": "3333",
          "BINARY_DIR": "${workspaceFolder}/build",
-         "BINARY": "mqtt_client",
+         "BINARY": "gfx-ex",
          "TARGET_DIR": "/usr/bin",
     },
     "cmake.generator": "Unix Makefiles",

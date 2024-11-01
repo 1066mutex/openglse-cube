@@ -1,9 +1,10 @@
 
 #include "MediaLoader.h"
 
+#include "ByteVector.h"
 #include "Log.h"
-#include "gfx/lodepng.h"
-#include "gfx/ujpeg.h"
+#include "lodepng.h"
+#include "ujpeg.h"
 #include "sgUtil.h"
 #include "FileInfo.h"
 

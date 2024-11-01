@@ -49,9 +49,9 @@ option(SIMULATE_ "simulating HW " OFF)
 option(HOST_BUILD_ "host build " OFF)
 
 
-set(BOARD_IP 192.168.0.130)
+set(BOARD_IP 192.168.0.94)
 set(PORT_NO 3000)
-set(TARGET_DIR /usr/bin/)
+set(TARGET_DIR /usr/bin)
 set(TARGET_BINARY ${PROJECT_NAME})
 
 # create targets that will execute custom commands
@@ -73,9 +73,9 @@ message(STATUS "Deploy executable ${PROJECT_NAME} to remote target ${BOARD_IP}:$
 # !!! these commands are added to the makefile and run when it is executed.
 add_custom_command(TARGET build_deploy POST_BUILD
     COMMAND echo "Deploying executable to remote target ${BOARD_IP}:${PORT_NO} ${TARGET_DIR} "
-     COMMAND scp ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME} root@${BOARD_IP}:${TARGET_DIR}
+    # COMMAND scp ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME} root@${BOARD_IP}:${TARGET_DIR}
     # using sshpass for connections that require a password 
-    #COMMAND sshpass -p "root" scp ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME} root@${BOARD_IP}:${TARGET_DIR}
+    COMMAND sshpass -p "root" scp ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME} root@${BOARD_IP}:${TARGET_DIR}
 )
 
 add_custom_command(TARGET host_build PRE_BUILD

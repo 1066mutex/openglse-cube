@@ -8,7 +8,7 @@
             "name": "(gdb) local C++ Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/mqtt_client",
+            "program": "${workspaceFolder}/build/gfx-ex",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
@@ -32,7 +32,7 @@
             "name": "(gdb) Connect to remote",
             "type": "cppdbg",
             "request": "attach",
-            "program": "${config:ENV_CONFIG.BINARY_DIR}/mqtt_client",
+            "program": "${config:ENV_CONFIG.BINARY_DIR}/gfx-ex",
             "miDebuggerServerAddress": "${config:ENV_CONFIG.TARGET_IP}:${config:ENV_CONFIG.DEBUG_PORT}",
             //"targetArchitecture": "arm64",
             "miDebuggerPath": "/usr/bin/gdb-multiarch",
@@ -53,10 +53,10 @@
              }
         },
         {
-            "name": "(gdb)debug deployed code",
+            "name": "${workspaceFolder}debug deployed code",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${config:ENV_CONFIG.BINARY_DIR}/mqtt_client",
+            "program": "${config:ENV_CONFIG.BINARY_DIR}/gfx-ex",
             "args": [
                 "192.168.0.68"
             ],
@@ -94,9 +94,9 @@
                 ""
             ],
             "stopAtEntry": true,
-            "cwd": "/home/eddie/lab1/mqtt_client/tests/test_client",
+            "cwd": "/home/eddie/lab1/gfx-ex/tests/test_client",
             "environment": [],
-            "program": "/home/eddie/lab1/mqtt_client/tests/test_client/build/test_client",
+            "program": "/home/eddie/lab1/gfx-ex/tests/test_client/build/test_client",
             "internalConsoleOptions": "openOnSessionStart",
             "MIMode": "gdb",
             "miDebuggerPath": "/usr/bin/gdb",
@@ -128,7 +128,7 @@
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}/build",
             "environment": [],
-            "program": "${workspaceFolder}/build/mqtt_client",
+            "program": "${workspaceFolder}/build/gfx-ex",
             "internalConsoleOptions": "openOnSessionStart",
             "miDebuggerPath": "/usr/bin/gdb",
             //"miDebuggerPath": "${workspaceFolder}/gdb_root.sh",
